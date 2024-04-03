@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:test_booble_translator/static_objects.dart';
 import 'package:test_booble_translator/language_to_language.dart';
 import 'package:test_booble_translator/settings_screen.dart';
@@ -113,6 +114,10 @@ class _HomeScreen extends State<HomeScreen> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // This method prevent the screen rotation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Booble translator',
@@ -201,8 +206,8 @@ class _HomeScreen extends State<HomeScreen> {
                         // TODO add handling of translation
                         onPressed: enteredText.isEmpty
                             ? () {
-                              print('text was empty');
-                            }
+                                print('text was empty');
+                              }
                             : (DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
                                 ? copyrightViolationMessage
                                 : () {
@@ -213,8 +218,7 @@ class _HomeScreen extends State<HomeScreen> {
                                       }
                                       if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
                                         listOfExamples = HTTP_requester.getExamplesFor(enteredText);
-                                      }
-                                      else {
+                                      } else {
                                         listOfExamples.clear();
                                       }
                                     });
