@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637851002827",
+    "project_id": "booble-translator",
+    "storage_bucket": "booble-translator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637851002827:android:924d187afc3a29fe20384e",
+        "android_client_info": {
+          "package_name": "com.example.test_booble_translator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGipKUukqmwg2wS27JaSdB8W5Z1iGsnMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,4 @@
+enum LanguageToLanguage {
+  englishToRussian,
+  russianToEnglish,
+}
