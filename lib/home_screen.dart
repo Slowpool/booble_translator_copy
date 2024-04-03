@@ -19,7 +19,7 @@ class _HomeScreen extends State<HomeScreen> {
   bool _wordsVoicingEnabled = true;
   bool _examplesOfUsingEnabled = true;
 
-  get examplesAreUsed => _examplesOfUsingEnabled && listOfExamples.isNotEmpty;
+  bool get examplesAreUsed => _examplesOfUsingEnabled && listOfExamples.isNotEmpty;
   Widget exampleWithIndex(int index) {
     var exampleIsExist = listOfExamples.elementAtOrNull(index) != null;
     if (exampleIsExist) {
@@ -51,12 +51,14 @@ class _HomeScreen extends State<HomeScreen> {
 
   set wordsVoicing(bool value) {
     setState(() {
+      print('voicing: $value');
       _wordsVoicingEnabled = value;
     });
   }
 
   set examplesOfUsing(bool value) {
     setState(() {
+      print('examples: $value');
       _examplesOfUsingEnabled = value;
     });
   }
@@ -87,7 +89,7 @@ class _HomeScreen extends State<HomeScreen> {
             actions: [
               Center(
                 child: ElevatedButton(
-                  child: Text("Я больше не буду нарушать закон"),
+                  child: Text("Я больше не буду пытаться нарушить закон"),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -151,7 +153,6 @@ class _HomeScreen extends State<HomeScreen> {
                           setState(() {
                             translateToEnglish = !translateToEnglish;
                           });
-                          print('target language: ${translateToEnglish ? 'english' : 'russian'}');
                         },
                         style: StaticObjects.usualButtonStyle,
                         child: Text(translateToEnglish ? ENGLISH_LANGUAGE_CAPTION : RUSSIAN_LANGUAGE_CAPTION),
@@ -198,7 +199,9 @@ class _HomeScreen extends State<HomeScreen> {
                       child: ElevatedButton(
                         // TODO add handling of translation
                         onPressed: enteredText.isEmpty
-                            ? () {}
+                            ? () {
+                              print('text was empty');
+                            }
                             : (DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
                                 ? copyrightViolationMessage
                                 : () {
@@ -207,8 +210,11 @@ class _HomeScreen extends State<HomeScreen> {
                                       if (TypeOfDataDeterminant.isWord(enteredText)) {
                                         pronunciation = HTTP_requester.getPronunciation();
                                       }
-                                      if (TypeOfDataDeterminant.isPhrase(enteredText)) {
+                                      if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
                                         listOfExamples = HTTP_requester.getExamples();
+                                      }
+                                      else {
+                                        listOfExamples.clear();
                                       }
                                     });
                                   }),
