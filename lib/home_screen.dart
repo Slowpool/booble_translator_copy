@@ -9,6 +9,7 @@ import 'package:test_booble_translator/HTTP_requester.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
   State createState() => _HomeScreen();
 }
 
@@ -22,7 +23,7 @@ class _HomeScreen extends State<HomeScreen> {
   bool get examplesAreUsed => _examplesOfUsingEnabled && listOfExamples.isNotEmpty;
   Widget exampleWithIndex(int index) {
     var exampleIsExist = listOfExamples.elementAtOrNull(index) != null;
-    if (exampleIsExist) {
+    if (examplesAreUsed && exampleIsExist) {
       return Column(
         children: [
           Padding(
@@ -211,7 +212,7 @@ class _HomeScreen extends State<HomeScreen> {
                                         pronunciation = HTTP_requester.getPronunciation();
                                       }
                                       if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
-                                        listOfExamples = HTTP_requester.getExamples();
+                                        listOfExamples = HTTP_requester.getExamplesFor(enteredText);
                                       }
                                       else {
                                         listOfExamples.clear();

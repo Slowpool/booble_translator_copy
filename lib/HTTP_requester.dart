@@ -1,15 +1,15 @@
 class HTTP_requester {
   // TODO implement get translation
   static String getTranslation(String text) {
-    return 'nice day today';
+    return 'translation: $text';
   }
 
   static getPronunciation() => Object();
 
-  static getExamples() => [
-        'first example',
-        'sexond example',
-        'third example',
-        'fourth example',
+  static getExamplesFor(text) => [
+        'first example: $text',
+        'sexond example: $text',
+        'third example: $text',
+        'fourth example: $text',
       ];
 }
