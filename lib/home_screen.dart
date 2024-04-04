@@ -91,7 +91,7 @@ class _HomeScreen extends State<HomeScreen> {
             actions: [
               Center(
                 child: ElevatedButton(
-                  child: Text("Я больше не буду пытаться нарушить закон"),
+                  child: Text("Я больше не буду пытаться нарушить ГК РФ"),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -223,23 +223,6 @@ class _HomeScreen extends State<HomeScreen> {
                                       }
                                     });
                                   }),
-                        // DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
-                        //         ? copyrightViolationMessage
-                        //         : () {
-                        //             setState() {
-                        //               translationTextController.text =
-                        //                   HTTP_requester.getTranslation(
-                        //                       enteredText);
-                        //               if (TypeOfDataDeterminant.isWord(
-                        //                   enteredText)) {
-                        //                 var pronunciation = HTTP_requester.getPronunciation();
-                        //               }
-                        //               if (TypeOfDataDeterminant.isPhrase(
-                        //                   enteredText)) {
-                        //                 // List<String> examples = HTTP_requester.getExamples();
-                        //               }
-                        //             }
-                        //           },
                         style: StaticObjects.usualButtonStyle,
                         child: Text('Перевести'),
                       ),
