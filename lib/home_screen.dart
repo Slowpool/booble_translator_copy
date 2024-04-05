@@ -4,7 +4,7 @@ import 'package:test_booble_translator/static_objects.dart';
 import 'package:test_booble_translator/language_to_language.dart';
 import 'package:test_booble_translator/settings_screen.dart';
 import 'package:test_booble_translator/type_of_data_determinant.dart';
-import 'package:test_booble_translator/data_base.dart';
+import 'package:test_booble_translator/database.dart';
 import 'package:test_booble_translator/HTTP_requester.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -123,7 +123,10 @@ class _HomeScreen extends State<HomeScreen> {
       title: 'Booble translator',
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Center(
+        body: FutureBuilder<bool>(future:
+        DatabaseWithCopyrightTexts.isCopyrightText('ss'),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          return Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 40, bottom: 0),
             child: Column(
@@ -208,7 +211,7 @@ class _HomeScreen extends State<HomeScreen> {
                             ? () {
                                 print('text was empty');
                               }
-                            : (DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
+                            : (await DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
                                 ? copyrightViolationMessage
                                 : () {
                                     setState(() {
@@ -318,7 +321,10 @@ class _HomeScreen extends State<HomeScreen> {
               ],
             ),
           ),
-        ),
+        );
+        
+        }
+        ), 
         backgroundColor: Color.fromARGB(255, 6, 127, 64),
         // backgroundColor: Color.fromARGB(255, 11, 90, 49),
       ),

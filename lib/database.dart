@@ -63,7 +63,7 @@ class DatabaseWithCopyrightTexts {
     );
   }
 
-  static Future<List<String>> copyrightTexts() async {
+  static Future<List<String>> get copyrightTexts async {
     final db = await database;
 
     final List<Map<String, Object?>> copyrightTextMaps =
@@ -101,9 +101,13 @@ class DatabaseWithCopyrightTexts {
     );
   }
 
-  static bool isCopyrightText(String text) {
-    // return copyrightTexts().then();
-    // TODO implement async to sync
-    return false;
+  static Future<bool> isCopyrightText(String text) async {
+    
+    List<String> texts = await copyrightTexts;
+    for(int i = 0; i  < texts.length; i++) {
+      texts[i] = texts[i].toLowerCase();
+    }
+    
+    return texts.contains(text);
   }
 }
