@@ -203,7 +203,6 @@ class _HomeScreen extends State<HomeScreen> {
                     SizedBox(
                       height: 50,
                       child: ElevatedButton(
-                        // TODO add handling of translation
                         onPressed: translationButtonOnPressed,
                         style: StaticObjects.usualButtonStyle,
                         child: Text('Перевести'),
@@ -300,9 +299,10 @@ class _HomeScreen extends State<HomeScreen> {
     if (isCopyrightText) {
       copyrightViolationMessage();
       setState(() {});
+      return;
     }
 
-    translationTextController.text = HTTP_requester.getTranslation(enteredText);
+    translationTextController.text = HTTP_requester.getTranslation(enteredText, translateToEnglish);
     setState(() {});
 
     if (TypeOfDataDeterminant.isWord(enteredText)) {
@@ -316,7 +316,6 @@ class _HomeScreen extends State<HomeScreen> {
       listOfExamples.clear();
     }
     setState(() {});
-
 
   }
 }

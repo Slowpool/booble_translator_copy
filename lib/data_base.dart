@@ -52,6 +52,8 @@ class DatabaseWithCopyrightTexts {
     // for(var text in texts) {
     //   print(text);
     // }
+
+    // insertCopyrightText(CopyrightText(copyrightText: 'some text with copyright'));
   }
 
   static Future<void> insertCopyrightText(CopyrightText copyrightText) async {
@@ -102,8 +104,11 @@ class DatabaseWithCopyrightTexts {
   }
 
   static Future<bool> isCopyrightText(String text) async {
-    // return copyrightTexts().then();
-    // TODO implement async to sync
-    return false;
+    List<String> texts = await copyrightTexts();
+    for(int i = 0; i  < texts.length; i++) {
+      texts[i] = texts[i].toLowerCase();
+    }
+    
+    return texts.contains(text);
   }
 }
