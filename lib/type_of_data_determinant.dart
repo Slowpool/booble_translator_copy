@@ -9,11 +9,4 @@ class TypeOfDataDeterminant {
     int wordsAmount = text.split(' ').length;
     return wordsAmount <= 5;
   }
-
-  // TODO do we need this?
-  // bool isText(String text) {
-  //   var textIsWord = isWord()
-  // }
-
-
 }

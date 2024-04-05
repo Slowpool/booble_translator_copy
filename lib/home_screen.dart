@@ -300,12 +300,7 @@ class _HomeScreen extends State<HomeScreen> {
 
     if (TypeOfDataDeterminant.isWord(enteredTextTranslation)) {
       voicingPath = HTTP_requester.getVoicingPath(enteredTextTranslation);
-      print('\n');
-      print('\n');
-      print('\n');
-      print('voicing path: $voicingPath');
       player.open(Audio(voicingPath));
-      // TODO difference of using setState
       setState(() {});
     }
     
