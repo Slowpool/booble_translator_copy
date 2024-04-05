@@ -4,7 +4,7 @@ import 'package:test_booble_translator/static_objects.dart';
 import 'package:test_booble_translator/settings_screen.dart';
 import 'package:test_booble_translator/type_of_data_determinant.dart';
 import 'package:test_booble_translator/data_base.dart';
-import 'package:test_booble_translator/HTTP_requester.dart';
+import 'package:test_booble_translator/http_requester.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -107,7 +107,6 @@ class _HomeScreen extends State<HomeScreen> {
     super.dispose();
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     // This method prevent the screen rotation

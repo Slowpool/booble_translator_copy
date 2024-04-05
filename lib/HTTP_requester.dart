@@ -1,17 +1,19 @@
 // ignore: camel_case_types
 class HTTP_requester {
-  static final Map<String, String> russianToEnglishTranslations = {
+  HTTP_requester._origin();
+
+  static final Map<String, String> _russianToEnglishTranslations = {
     'еж': 'hedgehog',
     'привет мир': 'hello world',
   };
 
-  static final Map<String, String> englishToRussianTranslations = {'hedgehog': 'еж', 'hello world': 'привет мир'};
+  static final Map<String, String> _englishToRussianTranslations = {'hedgehog': 'еж', 'hello world': 'привет мир'};
 
-  static String getTranslation(String text, bool translateToEnglish) {
-    return (translateToEnglish ? russianToEnglishTranslations[text] : englishToRussianTranslations[text]) ?? 'lol';
+  static String getTranslation(String text, bool _translateToEnglish) {
+    return (_translateToEnglish ? _russianToEnglishTranslations[text] : _englishToRussianTranslations[text]) ?? 'lol';
   }
 
-  static final Map<String, List<String>> examples = {
+  static final Map<String, List<String>> _examples = {
     'привет мир': [
       'Пример программы "привет мир" на языке Java',
       'Запустите компьютер и написать функцию "Привет Мир".',
@@ -43,7 +45,7 @@ class HTTP_requester {
   };
 
   // pattern null self handling
-  static List<String> getExamplesFor(text) => examples[text] ?? [];
+  static List<String> getExamplesFor(String text) => _examples[text] ?? [];
 
-  static getVoicingPath(String text) => 'lib/pronunciations/$text.mp3';
+  static getVoicingPath(String word) => 'lib/pronunciations/$word.mp3';
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StaticObjects {
+  
+  StaticObjects._origin();
+
   static final List<String> statesOfButton = ["Вкл.", "Выкл."];
 
   static final ButtonStyle usualButtonStyle = ElevatedButton.styleFrom(
@@ -29,9 +32,6 @@ class StaticObjects {
 
   static final EdgeInsets paddingForExamples =
       EdgeInsets.only(left: 10, right: 10);
-
-  static const exampleText =
-      'nice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing elsenice day today and nothing else';
 
   static Divider dividerForExamples = Divider(
     color: Color.fromARGB(255, 63, 72, 204),

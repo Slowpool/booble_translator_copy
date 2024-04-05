@@ -4,23 +4,22 @@ import 'package:test_booble_translator/static_objects.dart';
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({super.key}) : super();
 
-  var data;
-  SettingsScreen.withData(this.data);
+  var _data;
+  SettingsScreen.withData(this._data);
 
   @override
-  _SettingsScreen createState() => _SettingsScreen(data);
+  _SettingsScreen createState() => _SettingsScreen(_data);
 }
 
 class _SettingsScreen extends State<SettingsScreen> {
-  // TODO these fields must be in HomeScreen widget
-
   var _wordsVoicing;
   var _examplesOfUsing;
-  _SettingsScreen(data) {
-    _wordsVoicing = data[0];
-    _examplesOfUsing = data[1];
+  _SettingsScreen(_data) {
+    _wordsVoicing = _data[0];
+    _examplesOfUsing = _data[1];
   }
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -61,14 +60,6 @@ class _SettingsScreen extends State<SettingsScreen> {
                         );
                       },
                     ),
-                    // TODO cut from release version
-                    // ElevatedButton(
-                    //   style: StaticObjects.usualButtonStyle,
-                    //   onPressed: () {
-                    //     // TODO implement onPressed event
-                    //   },
-                    //   child: Text(StaticObjects.statesOfButton[0]),
-                    // ),
                   ],
                 ),
                 Text(
@@ -99,14 +90,6 @@ class _SettingsScreen extends State<SettingsScreen> {
                         );
                       },
                     ),
-                    // TODO cut from release version
-                    // ElevatedButton(
-                    //   style: StaticObjects.usualButtonStyle,
-                    //   onPressed: () {
-                    //     // TODO implement onPressed event
-                    //   },
-                    //   child: Text(StaticObjects.statesOfButton[0]),
-                    // ),
                   ],
                 ),
                 Text(
@@ -117,7 +100,6 @@ class _SettingsScreen extends State<SettingsScreen> {
             ),
           ),
         ),
-        // backgroundColor: Color.fromARGB(255, 195, 195, 195),
         backgroundColor: Color.fromARGB(255, 112, 146, 190),
       ),
     );
