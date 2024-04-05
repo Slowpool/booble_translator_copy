@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_booble_translator/language_to_language.dart';
 
 class StaticObjects {
   static final List<String> statesOfButton = ["Вкл.", "Выкл."];

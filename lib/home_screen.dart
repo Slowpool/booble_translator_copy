@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:test_booble_translator/static_objects.dart';
-import 'package:test_booble_translator/language_to_language.dart';
 import 'package:test_booble_translator/settings_screen.dart';
 import 'package:test_booble_translator/type_of_data_determinant.dart';
 import 'package:test_booble_translator/data_base.dart';
 import 'package:test_booble_translator/HTTP_requester.dart';
-// import 'package:audioplayers/audioplayers.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -44,7 +43,7 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   bool translateToEnglish = false;
-  Object? pronunciation;
+  String voicingPath = '';
   List<String> listOfExamples = [];
 
   final TextEditingController enteredTextController = TextEditingController();
@@ -67,15 +66,10 @@ class _HomeScreen extends State<HomeScreen> {
     });
   }
 
-  var _voicingButtonOnPressed = () {
-    
-    print('*here will be voicing*');
-  };
-
-  // @override
-  // initState() {
-  //   enteredTextController =
-  // }
+  static final AssetsAudioPlayer player = AssetsAudioPlayer();
+  void _voicingButtonOnPressed() {
+    player.play();
+  }
 
   Future<dynamic> copyrightViolationMessage() {
     enteredTextController.clear();
@@ -89,8 +83,7 @@ class _HomeScreen extends State<HomeScreen> {
             insetPadding: EdgeInsets.symmetric(vertical: 200),
             title: Text("Попытка нарушения ГК РФ", style: StaticObjects.inputAndOutputTextStyle),
             content: Center(child: Text(
-                // TODO remove the rofl
-                "Вы попытались нарушить пункт 2.9 статьи 1270 ГК РФ «Исключительное право на произведение»: Использованием произведения независимо от того, совершаются ли соответствующие действия в целях извлечения прибыли или без такой цели, считается, в частности: перевод или другая переработка произведения. Дальнейший перевод не будет выполняться, а ваши данные об устройстве, включая местоположение, номер телефона, снилс и история передвижения, были отправлены в ближайшее отделение полиции. Удачного изучения английского языка!")),
+                "Вы попытались нарушить пункт 2.9 статьи 1270 ГК РФ «Исключительное право на произведение»: Использованием произведения независимо от того, совершаются ли соответствующие действия в целях извлечения прибыли или без такой цели, считается, в частности: перевод или другая переработка произведения. Дальнейший перевод не будет выполняться. Удачного изучения английского языка!")),
             actions: [
               Center(
                 child: ElevatedButton(
@@ -294,9 +287,6 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   void translationButtonOnPressed() async {
-    if (enteredText.isEmpty) {
-      print('text was empty');
-    }
 
     bool isCopyrightText = await DatabaseWithCopyrightTexts.isCopyrightText(enteredText);
     if (isCopyrightText) {
@@ -308,8 +298,14 @@ class _HomeScreen extends State<HomeScreen> {
     translationTextController.text = HTTP_requester.getTranslation(enteredText, translateToEnglish);
     setState(() {});
 
-    if (TypeOfDataDeterminant.isWord(enteredText)) {
-      pronunciation = HTTP_requester.getPronunciation();
+    if (TypeOfDataDeterminant.isWord(enteredTextTranslation)) {
+      voicingPath = HTTP_requester.getVoicingPath(enteredTextTranslation);
+      print('\n');
+      print('\n');
+      print('\n');
+      print('voicing path: $voicingPath');
+      player.open(Audio(voicingPath));
+      // TODO difference of using setState
       setState(() {});
     }
     

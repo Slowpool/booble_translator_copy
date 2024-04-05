@@ -1,4 +1,0 @@
-enum LanguageToLanguage {
-  englishToRussian,
-  russianToEnglish,
-}
