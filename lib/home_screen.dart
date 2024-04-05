@@ -299,16 +299,24 @@ class _HomeScreen extends State<HomeScreen> {
     bool isCopyrightText = await DatabaseWithCopyrightTexts.isCopyrightText(enteredText);
     if (isCopyrightText) {
       copyrightViolationMessage();
+      setState(() {});
     }
 
     translationTextController.text = HTTP_requester.getTranslation(enteredText);
+    setState(() {});
+
     if (TypeOfDataDeterminant.isWord(enteredText)) {
       pronunciation = HTTP_requester.getPronunciation();
+      setState(() {});
     }
+    
     if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
       listOfExamples = HTTP_requester.getExamplesFor(enteredText);
     } else {
       listOfExamples.clear();
     }
+    setState(() {});
+
+
   }
 }
