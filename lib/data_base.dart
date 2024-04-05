@@ -101,7 +101,7 @@ class DatabaseWithCopyrightTexts {
     );
   }
 
-  static bool isCopyrightText(String text) {
+  static Future<bool> isCopyrightText(String text) async {
     // return copyrightTexts().then();
     // TODO implement async to sync
     return false;

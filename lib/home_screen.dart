@@ -204,7 +204,7 @@ class _HomeScreen extends State<HomeScreen> {
                       height: 50,
                       child: ElevatedButton(
                         // TODO add handling of translation
-                        onPressed: ComputeMethodForTranslation(),
+                        onPressed: translationButtonOnPressed,
                         style: StaticObjects.usualButtonStyle,
                         child: Text('Перевести'),
                       ),
@@ -291,30 +291,24 @@ class _HomeScreen extends State<HomeScreen> {
     );
   }
 
-  Future<Function()?> ComputeMethodForTranslation() async {
+  void translationButtonOnPressed() async {
     if (enteredText.isEmpty) {
-      return () {
-        print('text was empty');
-      };
+      print('text was empty');
     }
 
     bool isCopyrightText = await DatabaseWithCopyrightTexts.isCopyrightText(enteredText);
     if (isCopyrightText) {
-      return copyrightViolationMessage;
+      copyrightViolationMessage();
     }
 
-    return () {
-      setState(() {
-        translationTextController.text = HTTP_requester.getTranslation(enteredText);
-        if (TypeOfDataDeterminant.isWord(enteredText)) {
-          pronunciation = HTTP_requester.getPronunciation();
-        }
-        if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
-          listOfExamples = HTTP_requester.getExamplesFor(enteredText);
-        } else {
-          listOfExamples.clear();
-        }
-      });
-    };
+    translationTextController.text = HTTP_requester.getTranslation(enteredText);
+    if (TypeOfDataDeterminant.isWord(enteredText)) {
+      pronunciation = HTTP_requester.getPronunciation();
+    }
+    if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
+      listOfExamples = HTTP_requester.getExamplesFor(enteredText);
+    } else {
+      listOfExamples.clear();
+    }
   }
 }
