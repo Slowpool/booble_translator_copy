@@ -45,5 +45,5 @@ class HTTP_requester {
   // pattern null self handling
   static List<String> getExamplesFor(text) => examples[text] ?? [];
 
-  static getPronunciation() => Object();
+  static getVoicingPath(String text) => 'voicing/$text.mp3';
 }

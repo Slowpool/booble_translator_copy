@@ -6,7 +6,7 @@ import 'package:test_booble_translator/settings_screen.dart';
 import 'package:test_booble_translator/type_of_data_determinant.dart';
 import 'package:test_booble_translator/data_base.dart';
 import 'package:test_booble_translator/HTTP_requester.dart';
-// import 'package:audioplayers/audioplayers.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -44,7 +44,6 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   bool translateToEnglish = false;
-  Object? pronunciation;
   List<String> listOfExamples = [];
 
   final TextEditingController enteredTextController = TextEditingController();
@@ -67,10 +66,11 @@ class _HomeScreen extends State<HomeScreen> {
     });
   }
 
-  var _voicingButtonOnPressed = () {
-    
-    print('*here will be voicing*');
-  };
+  late String voicingPath;
+  final AssetsAudioPlayer player = AssetsAudioPlayer();
+  void _voicingButtonOnPressed() {
+    player.play();
+  }
 
   // @override
   // initState() {
@@ -309,7 +309,8 @@ class _HomeScreen extends State<HomeScreen> {
     setState(() {});
 
     if (TypeOfDataDeterminant.isWord(enteredText)) {
-      pronunciation = HTTP_requester.getPronunciation();
+      voicingPath = HTTP_requester.getVoicingPath(enteredText);
+      player.open(Audio(voicingPath));
       setState(() {});
     }
     
