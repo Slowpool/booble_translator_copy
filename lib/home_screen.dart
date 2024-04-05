@@ -50,6 +50,7 @@ class _HomeScreen extends State<HomeScreen> {
   final TextEditingController translationTextController = TextEditingController();
 
   get enteredText => enteredTextController.text;
+  get enteredTextTranslation => translationTextController.text;
 
   set wordsVoicing(bool value) {
     setState(() {
@@ -311,7 +312,7 @@ class _HomeScreen extends State<HomeScreen> {
     }
     
     if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
-      listOfExamples = HTTP_requester.getExamplesFor(enteredText);
+      listOfExamples = HTTP_requester.getExamplesFor(enteredTextTranslation);
     } else {
       listOfExamples.clear();
     }
