@@ -204,42 +204,7 @@ class _HomeScreen extends State<HomeScreen> {
                       height: 50,
                       child: ElevatedButton(
                         // TODO add handling of translation
-                        onPressed: enteredText.isEmpty
-                            ? () {
-                                print('text was empty');
-                              }
-                            : (DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
-                                ? copyrightViolationMessage
-                                : () {
-                                    setState(() {
-                                      translationTextController.text = HTTP_requester.getTranslation(enteredText);
-                                      if (TypeOfDataDeterminant.isWord(enteredText)) {
-                                        pronunciation = HTTP_requester.getPronunciation();
-                                      }
-                                      if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
-                                        listOfExamples = HTTP_requester.getExamplesFor(enteredText);
-                                      } else {
-                                        listOfExamples.clear();
-                                      }
-                                    });
-                                  }),
-                        // DatabaseWithCopyrightTexts.isCopyrightText(enteredText)
-                        //         ? copyrightViolationMessage
-                        //         : () {
-                        //             setState() {
-                        //               translationTextController.text =
-                        //                   HTTP_requester.getTranslation(
-                        //                       enteredText);
-                        //               if (TypeOfDataDeterminant.isWord(
-                        //                   enteredText)) {
-                        //                 var pronunciation = HTTP_requester.getPronunciation();
-                        //               }
-                        //               if (TypeOfDataDeterminant.isPhrase(
-                        //                   enteredText)) {
-                        //                 // List<String> examples = HTTP_requester.getExamples();
-                        //               }
-                        //             }
-                        //           },
+                        onPressed: ComputeMethodForTranslation(),
                         style: StaticObjects.usualButtonStyle,
                         child: Text('Перевести'),
                       ),
@@ -324,5 +289,32 @@ class _HomeScreen extends State<HomeScreen> {
       ),
       color: Colors.green,
     );
+  }
+
+  Future<Function()?> ComputeMethodForTranslation() async {
+    if (enteredText.isEmpty) {
+      return () {
+        print('text was empty');
+      };
+    }
+
+    bool isCopyrightText = await DatabaseWithCopyrightTexts.isCopyrightText(enteredText);
+    if (isCopyrightText) {
+      return copyrightViolationMessage;
+    }
+
+    return () {
+      setState(() {
+        translationTextController.text = HTTP_requester.getTranslation(enteredText);
+        if (TypeOfDataDeterminant.isWord(enteredText)) {
+          pronunciation = HTTP_requester.getPronunciation();
+        }
+        if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
+          listOfExamples = HTTP_requester.getExamplesFor(enteredText);
+        } else {
+          listOfExamples.clear();
+        }
+      });
+    };
   }
 }
