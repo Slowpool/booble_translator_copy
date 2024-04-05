@@ -101,7 +101,7 @@ class DatabaseWithCopyrightTexts {
     );
   }
 
-  static Future<bool> isCopyrightText(String text) async {
+  static bool isCopyrightText(String text) async {
     
     List<String> texts = await copyrightTexts;
     for(int i = 0; i  < texts.length; i++) {
