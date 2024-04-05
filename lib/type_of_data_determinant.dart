@@ -1,5 +1,5 @@
 class TypeOfDataDeterminant {
-  TypeOfDataDeterminant._();
+  TypeOfDataDeterminant._origin();
 
   static bool isWord(String text) {
     return text.split(' ').length == 1;

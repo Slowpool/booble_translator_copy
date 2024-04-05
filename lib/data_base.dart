@@ -5,6 +5,7 @@ import 'package:test_booble_translator/copyright_text_model.dart';
 
 class DatabaseWithCopyrightTexts {
   static late Future<Database> database;
+  DatabaseWithCopyrightTexts._origin();
 
   static createInstance() async {
     database = openDatabase(

@@ -22,7 +22,7 @@ class _HomeScreen extends State<HomeScreen> {
   bool _examplesOfUsingEnabled = true;
 
   bool get examplesAreUsed => _examplesOfUsingEnabled && listOfExamples.isNotEmpty;
-  Widget exampleWithIndex(int index) {
+  Widget buildExampleWithIndex(int index) {
     var exampleIsExist = listOfExamples.elementAtOrNull(index) != null;
     if (examplesAreUsed && exampleIsExist) {
       return Column(
@@ -54,14 +54,12 @@ class _HomeScreen extends State<HomeScreen> {
 
   set wordsVoicing(bool value) {
     setState(() {
-      print('voicing: $value');
       _wordsVoicingEnabled = value;
     });
   }
 
   set examplesOfUsing(bool value) {
     setState(() {
-      print('examples: $value');
       _examplesOfUsingEnabled = value;
     });
   }
@@ -260,11 +258,11 @@ class _HomeScreen extends State<HomeScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                exampleWithIndex(0),
-                                exampleWithIndex(1),
-                                exampleWithIndex(2),
-                                exampleWithIndex(3),
-                                exampleWithIndex(4),
+                                buildExampleWithIndex(0),
+                                buildExampleWithIndex(1),
+                                buildExampleWithIndex(2),
+                                buildExampleWithIndex(3),
+                                buildExampleWithIndex(4),
                               ],
                             ),
                             // borderOnForeground: true,
