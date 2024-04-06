@@ -241,6 +241,7 @@ class _HomeScreen extends State<HomeScreen> {
                             enabledBorder: StaticObjects.borderForOutputField,
                             focusedBorder: StaticObjects.borderForOutputField,
                           ),
+                          style: StaticObjects.inputAndOutputTextStyle,
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 40),
@@ -257,13 +258,7 @@ class _HomeScreen extends State<HomeScreen> {
                             color: Color.fromARGB(255, 127, 127, 127),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: [
-                                buildExampleWithIndex(0),
-                                buildExampleWithIndex(1),
-                                buildExampleWithIndex(2),
-                                buildExampleWithIndex(3),
-                                buildExampleWithIndex(4),
-                              ],
+                              children: buildExamples(),
                             ),
                             // borderOnForeground: true,
                           ),
@@ -308,5 +303,13 @@ class _HomeScreen extends State<HomeScreen> {
     }
     setState(() {});
 
+  }
+  
+  List<Widget> buildExamples() {
+    List<Widget> examples = [];
+    for(int i = 0 ; i < 5; i++) {
+      examples.add(buildExampleWithIndex(i));
+    }
+    return examples;
   }
 }
