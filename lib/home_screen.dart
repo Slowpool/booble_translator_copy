@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:test_booble_translator/static_objects.dart';
 import 'package:test_booble_translator/settings_screen.dart';
 import 'package:test_booble_translator/type_of_data_determinant.dart';
-import 'package:test_booble_translator/data_base.dart';
+import 'package:test_booble_translator/database.dart';
 import 'package:test_booble_translator/http_requester.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
@@ -80,8 +80,9 @@ class _HomeScreen extends State<HomeScreen> {
           child: AlertDialog(
             insetPadding: EdgeInsets.symmetric(vertical: 200),
             title: Text("Попытка нарушения ГК РФ", style: StaticObjects.inputAndOutputTextStyle),
-            content: Center(child: Text(
-                "Вы попытались нарушить пункт 2.9 статьи 1270 ГК РФ «Исключительное право на произведение»: Использованием произведения независимо от того, совершаются ли соответствующие действия в целях извлечения прибыли или без такой цели, считается, в частности: перевод или другая переработка произведения. Дальнейший перевод не будет выполняться. Удачного изучения английского языка!")),
+            content: Center(
+                child: Text(
+                    "Вы попытались нарушить пункт 2.9 статьи 1270 ГК РФ «Исключительное право на произведение»: Использованием произведения независимо от того, совершаются ли соответствующие действия в целях извлечения прибыли или без такой цели, считается, в частности: перевод или другая переработка произведения. Дальнейший перевод не будет выполняться. Удачного изучения английского языка!")),
             actions: [
               Center(
                 child: ElevatedButton(
@@ -277,7 +278,6 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   void translationButtonOnPressed() async {
-
     bool isCopyrightText = await DatabaseWithCopyrightTexts.isCopyrightText(enteredText);
     if (isCopyrightText) {
       copyrightViolationMessage();
@@ -293,19 +293,18 @@ class _HomeScreen extends State<HomeScreen> {
       player.open(Audio(voicingPath));
       setState(() {});
     }
-    
+
     if (_examplesOfUsingEnabled && TypeOfDataDeterminant.isPhrase(enteredText)) {
       listOfExamples = HTTP_requester.getExamplesFor(enteredTextTranslation);
     } else {
       listOfExamples.clear();
     }
     setState(() {});
-
   }
-  
+
   List<Widget> buildExamples() {
     List<Widget> examples = [];
-    for(int i = 0 ; i < 5; i++) {
+    for (int i = 0; i < 5; i++) {
       examples.add(buildExampleWithIndex(i));
     }
     return examples;
