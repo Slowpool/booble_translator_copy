@@ -17,9 +17,8 @@ class DatabaseWithCopyrightTexts {
       },
       version: 1,
     );
-
+    // Данный код использовался для однократной инициализации базы данных и ее содержимого
     // deleteDatabase(join(await getDatabasesPath(), 'copyrightTexts.db'));
-
     // await deleteAllCopyrightTexts();
     // var db = await database;
     // var texts_with_copyright = [

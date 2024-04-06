@@ -186,13 +186,13 @@ class _HomeScreen extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Voicing button
+                    // voicing button
                     ElevatedButton(
                       onPressed: _wordsVoicingEnabled && translateToEnglish ? _voicingButtonOnPressed : null,
                       style: StaticObjects.styleOfEmptyButton,
                       child: StaticObjects.iconWithVolumeUp,
                     ),
-                    // Translate button
+                    // translation button
                     SizedBox(
                       height: 50,
                       child: ElevatedButton(
@@ -260,7 +260,6 @@ class _HomeScreen extends State<HomeScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: buildExamples(),
                             ),
-                            // borderOnForeground: true,
                           ),
                         ),
                       ],
@@ -272,7 +271,6 @@ class _HomeScreen extends State<HomeScreen> {
           ),
         ),
         backgroundColor: Color.fromARGB(255, 6, 127, 64),
-        // backgroundColor: Color.fromARGB(255, 11, 90, 49),
       ),
       color: Colors.green,
     );
